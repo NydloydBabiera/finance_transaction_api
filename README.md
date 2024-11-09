@@ -8,6 +8,7 @@ Financial API to setup your accounts and post transactions with entries
 - [Database](#database)
 - [Config](#config)
 - [Sync Schema](#syncSchema)
+- [Routes and Body](#routesBody)
 
 
 ## Installation
@@ -24,12 +25,12 @@ cd project-name
 # Install dependencies
 npm install
 ```
-## database
+## Database
 ```
 #create a database in pg_admin
 CREATE DATABASE finance_transactions
 ```
-## config env
+## Config ENV
 ```
 PGUSER = username
 PGPASSWORD = password
@@ -38,11 +39,46 @@ PGHOST = host
 PGPORT = database port
 PORT = api port
 ```
-## syncSchema
+## Sync Schema
 ```
 npm run dev
 ```
 
+## Routes and Body
+
+Chart of Accounts
+* Routes
+```
+POST: http://localhost:7100/accounts/addNewAccount
+{
+    "account_code":1234,
+    "account_name":"test account",
+    "description":"for testing purposes",
+    "nature_account": "DR"
+}
+GET: http://localhost:7100/accounts/getAllAccounts
+```
+Subsidiary Accounts
+* Routes
+```
+POST: http://localhost:7100/subsidiary/addNewSubsidiary
+{
+    "code": 4141,
+    "subsidiary_name": "Nydloyd Babiera",
+    "description": "test subsidiary"
+}
+GET: http://localhost:7100/subsidiary/getAllSubsidiary
+```
+Subsidiary and Chart of Accounts Matching
+* Routes
+```
+POST: http://localhost:7100/subAccMatching/matchSubsAccount
+{
+    "account_id": 3,
+    "subsidiary_id":1
+}
+GET: http://localhost:7100/subAccMatching/getAllSubAcctMatching
+```
 
 
 
