@@ -1,0 +1,6 @@
+PGUSER = username
+PGPASSWORD = password
+PGDATABASE = database name
+PGHOST = host
+PGPORT = database port
+PORT = api port
