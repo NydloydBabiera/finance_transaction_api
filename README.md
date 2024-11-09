@@ -7,8 +7,8 @@ Financial API to setup your accounts and post transactions with entries
 - [Installation](#installation)
 - [Database](#database)
 - [Config](#config)
-- [Sync Schema](#syncSchema)
-- [Routes and Body](#routesBody)
+- [SyncSchema](#syncSchema)
+- [Routes&Body](#routesBody)
 
 
 ## Installation
@@ -30,7 +30,7 @@ npm install
 #create a database in pg_admin
 CREATE DATABASE finance_transactions
 ```
-## Config ENV
+## Config
 ```
 PGUSER = username
 PGPASSWORD = password
@@ -39,12 +39,12 @@ PGHOST = host
 PGPORT = database port
 PORT = api port
 ```
-## Sync Schema
+## SyncSchema
 ```
 npm run dev
 ```
 
-## Routes and Body
+## Routes&Body
 
 Chart of Accounts
 * Routes
