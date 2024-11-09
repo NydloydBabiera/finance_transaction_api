@@ -18,6 +18,7 @@ app.use((req, res, next) => {
 app.use("/accounts", require("./routes/accountCharts"));
 app.use("/subsidiary", require("./routes/subsidiary"));
 app.use("/generalLedger", require("./routes/generalLedger"));
+app.use("/subAccMatching", require("./routes/subsidiaryAccountMatching"));
 
 (async () => {
   try {

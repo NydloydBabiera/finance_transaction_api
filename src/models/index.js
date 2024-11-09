@@ -21,28 +21,28 @@ GeneralLedgerTransactions.belongsTo(AccountCharts,{
 AccountCharts.hasMany(SubsidiaryAccountMatching,{
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
-    foreignKey: 'user_information_id',
+    foreignKey: 'account_id',
     as: 'subsidiary_account'
 })
 
 SubsidiaryAccountMatching.belongsTo(AccountCharts,{
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
-    foreignKey: 'user_information_id',
+    foreignKey: 'account_id',
     as: 'subsidiary_account'
 })
 
 SubsidiaryAccounts.hasMany(SubsidiaryAccountMatching,{
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
-    foreignKey: 'subsidary_id',
+    foreignKey: 'subsidiary_id',
     as: 'subsidiary'
 })
 
 SubsidiaryAccountMatching.belongsTo(SubsidiaryAccounts,{
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
-    foreignKey: 'subsidary_id',
+    foreignKey: 'subsidiary_id',
     as: 'subsidiary'
 })
 
