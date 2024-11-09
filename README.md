@@ -1,6 +1,6 @@
 # Financial/Accounting API
 
-A brief description of what the project does, its purpose, and who it's for.
+Financial API to setup your accounts and post transactions with entries
 
 ## Table of Contents
 
