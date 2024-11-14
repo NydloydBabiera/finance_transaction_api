@@ -1,8 +1,8 @@
 const Sequelize = require("sequelize");
 const dbConn = require("../data-access/dbConn");
 
-const GeneralLedgerTransactions = dbConn.define("gl_transactions", {
-  gl_transactions_id: {
+const ReceiptTransaction = dbConn.define("receipt_transaction", {
+  receipt_id: {
     type: Sequelize.INTEGER,
     allowNull: false,
     primaryKey: true,
@@ -10,28 +10,28 @@ const GeneralLedgerTransactions = dbConn.define("gl_transactions", {
   },
   document_no: {
     type: Sequelize.STRING,
-    allowNull: false
-  },
-  explanation: {
-    type: Sequelize.TEXT,
     allowNull: false,
-    unique: false,
   },
-  debit: {
-    type: Sequelize.FLOAT,
-    allowNull: false,
-    unique: false,
-  },
-  credit: {
-    type: Sequelize.FLOAT,
-    allowNull: false,
-    unique: false,
-  },
-  posted_date: {
+  document_date: {
     type: Sequelize.DATE,
     allowNull: false,
     unique: false,
   },
+  transaction_type: {
+    type: Sequelize.ENUM("CASH", "BANK", "CHECK"),
+    allowNull: false,
+    unique: false,
+  },
+  amt_paid: {
+    type: Sequelize.FLOAT,
+    allowNull: false,
+    unique: false,
+  },
+  explanation:{
+    type:Sequelize.TEXT,
+    allowNull: false,
+    unique: false
+}
 });
 
-module.exports = GeneralLedgerTransactions;
+module.exports = ReceiptTransaction;

@@ -1,25 +1,33 @@
-const Sequelize = require('sequelize')
-const dbConn = require('../data-access/dbConn')
+const Sequelize = require("sequelize");
+const dbConn = require("../data-access/dbConn");
 
-const GeneralLedgerTransactionLines = dbConn.define('gl_transaction_lines',{
-    gl_transaction_line_id:{
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        primaryKey: true,
-        autoIncrement: true
-    },
-    debit:{
-        type:Sequelize.FLOAT,
-        allowNull: false,
-        unique: false
-    },
-    credit:{
-        type:Sequelize.FLOAT,
-        allowNull: false,
-        unique: false
-    },
+const GeneralLedgerTransactionLines = dbConn.define("gl_transaction_lines", {
+  gl_transaction_line_id: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+    primaryKey: true,
+    autoIncrement: true,
+  },
+  document_no: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    unique: false,
+  },
+  debit: {
+    type: Sequelize.FLOAT,
+    allowNull: false,
+    unique: false,
+  },
+  credit: {
+    type: Sequelize.FLOAT,
+    allowNull: false,
+    unique: false,
+  },
+  explanation: {
+    type: Sequelize.TEXT,
+    allowNull: false,
+    unique: false,
+  },
+});
 
-
-})
-
-module.exports = GeneralLedgerTransactionLines
+module.exports = GeneralLedgerTransactionLines;

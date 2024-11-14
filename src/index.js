@@ -19,6 +19,8 @@ app.use("/accounts", require("./routes/accountCharts"));
 app.use("/subsidiary", require("./routes/subsidiary"));
 app.use("/generalLedger", require("./routes/generalLedger"));
 app.use("/subAccMatching", require("./routes/subsidiaryAccountMatching"));
+app.use("/invoice", require("./routes/invoice"));
+app.use("/receipt", require("./routes/receipt"));
 
 (async () => {
   try {
