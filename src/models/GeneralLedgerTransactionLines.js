@@ -11,7 +11,6 @@ const GeneralLedgerTransactionLines = dbConn.define("gl_transaction_lines", {
   document_no: {
     type: Sequelize.STRING,
     allowNull: false,
-    unique: false,
   },
   debit: {
     type: Sequelize.FLOAT,

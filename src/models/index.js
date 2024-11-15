@@ -53,16 +53,16 @@ SubsidiaryAccountMatching.belongsTo(SubsidiaryAccounts, {
 SubsidiaryAccounts.hasMany(GeneralLedgerTransactionLines, {
   onDelete: "CASCADE",
   onUpdate: "CASCADE",
-  foreignKey: "subsidary_id",
-  as: "subsidiary_account",
-});
-GeneralLedgerTransactionLines.belongsTo(SubsidiaryAccounts, {
-  onDelete: "CASCADE",
-  onUpdate: "CASCADE",
-  foreignKey: "subsidary_id",
+  foreignKey: "subsidiary_id",
   as: "subsidiary_account",
 });
 
+GeneralLedgerTransactionLines.belongsTo(SubsidiaryAccounts, {
+  onDelete: "CASCADE",
+  onUpdate: "CASCADE",
+  foreignKey: "subsidiary_id",
+  as: "subsidiary_account",
+});
 //gl transaction and gl transaction line
 GeneralLedgerTransactions.hasMany(GeneralLedgerTransactionLines, {
   onDelete: "CASCADE",

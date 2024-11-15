@@ -3,7 +3,7 @@ const {
   GeneralLedgerTransactions,
   GeneralLedgerTransactionLines,
 } = require("../models");
-async function postTransactions({ transactionDetails }) {
+async function postTransactions(transactionDetails) {
   const createEntry = await dbConn.transaction();
   const { header, lines } = transactionDetails;
   try {
@@ -13,12 +13,16 @@ async function postTransactions({ transactionDetails }) {
     });
 
     // post to gl lines for payment breakdown
-    for await (const line of lines) {
-      line.gl_transaction_id = glHeader.gl_transaction_id;
-      await GeneralLedgerTransactionLines.create(line, {
-        transaction: createEntry,
-      });
+    if (lines) {
+      console.log("lines:",lines)
+      for await (const line of lines) {
+        line.gl_transaction_id = glHeader.gl_transactions_id;
+        await GeneralLedgerTransactionLines.create(line, {
+          transaction: createEntry,
+        });
+      }
     }
+
     await createEntry.commit();
     return { glHeader };
   } catch (error) {

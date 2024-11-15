@@ -79,6 +79,27 @@ POST: http://localhost:7100/subAccMatching/matchSubsAccount
 }
 GET: http://localhost:7100/subAccMatching/getAllSubAcctMatching
 ```
+Posting GL entries
+* Routes
+```
+POST: http://localhost:7100/generalLedger/postGlTransactions
+{
+    {
+    "accountCode": "4444",
+    "glEntries":[
+        {
+            "documentNo": "72578", 
+            "datePosted": "2021-06-06", 
+            "explanation": "explanation", 
+            "subsidiaryData": {"code":"18517", "subsidiary_name": "ESTANISLAO, RENE", "description": "CUSTOMER"}, 
+            "debit": 0, 
+            "credit": 30
+        }
+    ]
+    }
+}
 
+GET: http://localhost:7100/generalLedger/getAllGLtransactions
+```
 
 

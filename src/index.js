@@ -25,7 +25,7 @@ app.use("/receipt", require("./routes/receipt"));
 (async () => {
   try {
     //sync models
-    await dbConn.sync({ alter: true });
+    await dbConn.sync({ sync: true });
     console.log(`Attempting to run server on port ${process.env.PORT}`);
 
     app.listen(process.env.PORT, () => {

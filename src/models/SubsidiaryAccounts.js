@@ -20,7 +20,7 @@ const SubsidiaryAccounts = dbConn.define('subsidiary_accounts',{
     },
     description:{
         type:Sequelize.TEXT,
-        allowNull: false,
+        allowNull: true,
         unique: false
     }
 
