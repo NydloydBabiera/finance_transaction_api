@@ -27,7 +27,7 @@ const getAccountPerCode = async (param) => {
     },
   })
     .then((account) => {
-      return account.dataValues;
+      return account?.dataValues;
     })
     .catch((error) => console.log(error));
 

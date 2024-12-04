@@ -1,5 +1,6 @@
 const dbConn = require("../data-access/dbConn");
-const { SubsidiaryAccounts } = require("../models");
+const { SubsidiaryAccounts, AccountCharts } = require("../models");
+
 const createSubsidiary = async (subDetails) => {
   const createSub = await dbConn.transaction();
 
@@ -14,8 +15,26 @@ const createSubsidiary = async (subDetails) => {
       return error;
     });
 
-    await createSub.commit();
+  await createSub.commit();
   return newSubsidiary;
 };
 
-module.exports = { createSubsidiary };
+const creatAccount = async (accountDetails) => {
+  const createAcc = await dbConn.transaction();
+  console.log(accountDetails)
+  const newAcc = await AccountCharts.create(accountDetails, {
+    transaction: createAcc,
+  })
+    .then((account) => {
+      return account;
+    })
+    .catch((error) => {
+      console.log(`ERROR:${error}`);
+      return error;
+    });
+
+  await createAcc.commit();
+  return newAcc;
+};
+
+module.exports = { createSubsidiary, creatAccount };

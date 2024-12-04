@@ -20,7 +20,7 @@ const AccountCharts = dbConn.define('account_charts',{
     },
     description:{
         type:Sequelize.TEXT,
-        allowNull: false,
+        allowNull: true,
         unique: false
     },
     nature_account:{

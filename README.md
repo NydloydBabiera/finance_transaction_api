@@ -10,7 +10,6 @@ Financial API to setup your accounts and post transactions with entries
 - [SyncSchema](#syncSchema)
 - [Routes&Body](#routesBody)
 
-
 ## Installation
 
 Instructions on how to install and set up the project. For example:
@@ -25,12 +24,16 @@ cd project-name
 # Install dependencies
 npm install
 ```
+
 ## Database
+
 ```
 #create a database in pg_admin
 CREATE DATABASE finance_transactions
 ```
+
 ## Config
+
 ```
 PGUSER = username
 PGPASSWORD = password
@@ -39,7 +42,9 @@ PGHOST = host
 PGPORT = database port
 PORT = api port
 ```
+
 ## SyncSchema
+
 ```
 npm run dev
 ```
@@ -47,7 +52,9 @@ npm run dev
 ## Routes&Body
 
 Chart of Accounts
-* Routes
+
+- Routes
+
 ```
 POST: http://localhost:7100/accounts/addNewAccount
 {
@@ -58,8 +65,11 @@ POST: http://localhost:7100/accounts/addNewAccount
 }
 GET: http://localhost:7100/accounts/getAllAccounts
 ```
+
 Subsidiary Accounts
-* Routes
+
+- Routes
+
 ```
 POST: http://localhost:7100/subsidiary/addNewSubsidiary
 {
@@ -69,8 +79,11 @@ POST: http://localhost:7100/subsidiary/addNewSubsidiary
 }
 GET: http://localhost:7100/subsidiary/getAllSubsidiary
 ```
+
 Subsidiary and Chart of Accounts Matching
-* Routes
+
+- Routes
+
 ```
 POST: http://localhost:7100/subAccMatching/matchSubsAccount
 {
@@ -79,27 +92,30 @@ POST: http://localhost:7100/subAccMatching/matchSubsAccount
 }
 GET: http://localhost:7100/subAccMatching/getAllSubAcctMatching
 ```
+
 Posting GL entries
-* Routes
+
+- Routes
+
 ```
 POST: http://localhost:7100/generalLedger/postGlTransactions
 {
     {
-    "accountCode": "4444",
-    "glEntries":[
-        {
-            "documentNo": "72578", 
-            "datePosted": "2021-06-06", 
-            "explanation": "explanation", 
-            "subsidiaryData": {"code":"18517", "subsidiary_name": "ESTANISLAO, RENE", "description": "CUSTOMER"}, 
-            "debit": 0, 
-            "credit": 30
-        }
-    ]
+        "glEntries": [
+            {
+                "accno": "1242424",
+                "accname": "Hocus Pocus",
+                "docno": "S23162A",
+                "date": "8/8/2030",
+                "particulars": "usccus",
+                "code": "20362",
+                "name": "Systems Administrator III",
+                "debit": 7.91,
+                "credit": 0
+            }
+        ]
     }
 }
 
 GET: http://localhost:7100/generalLedger/getAllGLtransactions
 ```
-
-

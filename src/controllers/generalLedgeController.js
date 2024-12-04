@@ -1,4 +1,4 @@
-const { createSubsidiary } = require("../common/insert");
+const { createSubsidiary, creatAccount } = require("../common/insert");
 const { getAccountPerCode, getSubsidiaryPerCode } = require("../common/query");
 const dbConn = require("../data-access/dbConn");
 const {
@@ -11,37 +11,55 @@ const {
 const postGLTransaction = async (req, res) => {
   const postGL = await dbConn.transaction();
 
-  const { accountCode, glEntries } = req.body;
-
-  // get the account details
-  const accountGL = await getAccountPerCode(accountCode);
+  const { glEntries } = req.body;
 
   for await (const entry of glEntries) {
     const {
-      documentNo,
-      datePosted,
-      explanation,
-      subsidiaryData,
+      accno,
+      accname,
+      docno,
+      date,
+      particulars,
+      code,
+      name,
       debit,
       credit,
     } = entry;
-    let subsidiary = await getSubsidiaryPerCode(subsidiaryData.code);
+    // get the account details
+    let accountGL = await getAccountPerCode(accno);
+    //get subsidiary details
+    let subsidiary = await getSubsidiaryPerCode(code);
+
+    const subsidiaryData = {
+      code,
+      subsidiary_name: name,
+      description: `Migration:${new Date()}`,
+    };
+
+    const accntDetails = {
+      account_code: accno,
+      account_name: accname,
+      description: `Migration:${new Date().toDateString('yyyy-MM-dd')}`,
+    };
+
 
     if (!subsidiary) {
       subsidiary = await createSubsidiary(subsidiaryData);
     }
 
+    if (!accountGL) {
+      accountGL = await creatAccount(accntDetails);
+    }
+
     const glData = {
-      document_no: documentNo,
-      explanation: explanation,
-      posted_date: datePosted,
+      document_no: docno,
+      explanation: particulars,
+      posted_date: date,
       debit: debit || 0,
       credit: credit || 0,
       account_id: accountGL.account_id,
       subsidiary_id: subsidiary.subsidiary_account_id,
     };
-
-    console.log("glData:", glData);
 
     try {
       const recordGL = await GeneralLedgerTransactions.create(glData, {
