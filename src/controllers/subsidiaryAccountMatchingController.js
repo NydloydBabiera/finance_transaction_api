@@ -1,3 +1,4 @@
+const { where } = require("sequelize");
 const dbConn = require("../data-access/dbConn");
 const { SubsidiaryAccountMatching, AccountCharts, SubsidiaryAccounts } = require("../models");
 
@@ -5,8 +6,20 @@ const matchSubsidiaryAccount = async (req, res) => {
   const createSubAccMatching = await dbConn.transaction();
 
   const subAccIds = req.body;
-
+const {account_id, subsidiary_id} = subAccIds
   try {
+
+    const isMatchingExist = await SubsidiaryAccountMatching.findAll({
+      where:[
+        {account_id: account_id},
+        {subsidiary_id: subsidiary_id}
+      ]
+    })
+
+    if(isMatchingExist){
+      throw new Error("Matching already exist")
+    }
+
     const addSubAccMatching = await SubsidiaryAccountMatching.create(subAccIds, {
       transaction: createSubAccMatching,
     });
