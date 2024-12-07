@@ -72,15 +72,19 @@ const postGLTransaction = async (req, res) => {
         glData,
         { transaction: postGL }
       );
-      await postGL.commit();
 
-      res.status(200).json({ recordGL, postTransactionLines });
+   
     } catch (error) {
       res.json(error);
       console.log(error);
       await postGL.rollback();
     }
+    
   }
+  
+  await postGL.commit();
+  res.status(200).json({message: "Data successfully posted!" });
+ 
 };
 
 const getAllGLtransactions = async (req, res) => {
